@@ -68,7 +68,7 @@
       <DependentUpon>202302212100160_addProduto.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Pagination\PaginationParameters.cs" />
+    <Compile Include="Pagination\ParametrosPaginacao.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\frmProdutos.cs">
