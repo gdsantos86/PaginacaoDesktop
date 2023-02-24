@@ -4,6 +4,7 @@ using System;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using static PaginacaoDesktop.Pagination.ParametrosPaginacao;
 
 namespace PaginacaoDesktop.Views
 {
@@ -11,6 +12,7 @@ namespace PaginacaoDesktop.Views
     {
         private int _totalRegistros;
         private ParametrosPaginacao _paginacao;
+        private int _numeroPagina = 1;
 
 
 
@@ -39,13 +41,25 @@ namespace PaginacaoDesktop.Views
 
         private void btnAnterior_Click(object sender, EventArgs e)
         {
-            RealizaPaginacao(false);
+            RealizaPaginacao(TipoDeslocamento.ANTERIOR);
         }
 
 
         private void btnProximo_Click(object sender, EventArgs e)
         {
-            RealizaPaginacao(true);
+            RealizaPaginacao(TipoDeslocamento.PROXIMO);
+        }
+
+
+        private void btnPrimeiro_Click(object sender, EventArgs e)
+        {
+            RealizaPaginacao(TipoDeslocamento.PRIMEIRO);
+        }
+
+
+        private void btnUltimo_Click(object sender, EventArgs e)
+        {
+            RealizaPaginacao(TipoDeslocamento.ULTIMO);
         }
 
 
@@ -58,7 +72,7 @@ namespace PaginacaoDesktop.Views
         }
 
 
-        public void RealizaPaginacao(bool proximo)
+        public void RealizaPaginacao(TipoDeslocamento tipoDeslocamento)
         {
             if (txtItensPorPagina.Text == string.Empty || Convert.ToInt32(txtItensPorPagina.Text) == 0)
             {
@@ -66,7 +80,7 @@ namespace PaginacaoDesktop.Views
                 return;
             }
 
-            _paginacao.ConfiguraPaginacao(Convert.ToInt32(txtItensPorPagina.Text), _totalRegistros, proximo);
+            _paginacao.ConfiguraPaginacao(Convert.ToInt32(txtItensPorPagina.Text), _totalRegistros, tipoDeslocamento);
             ListaProdutosPaginados(_paginacao.Deslocamento, _paginacao.ItensPagina);
 
             txtItensPorPagina.Text = _paginacao.ItensPagina.ToString(); 
@@ -85,7 +99,6 @@ namespace PaginacaoDesktop.Views
                 dgvProdutos.DataSource = produtos;
             }
         }
-
 
 
     }
