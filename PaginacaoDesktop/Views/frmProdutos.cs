@@ -76,7 +76,7 @@ namespace PaginacaoDesktop.Views
         {
             if (txtItensPorPagina.Text == string.Empty || Convert.ToInt32(txtItensPorPagina.Text) == 0)
             {
-                MessageBox.Show("O campo Itens por página deve conter um valor diferente de 0.");
+                MessageBox.Show("O campo Itens por página deve conter um valor diferente de 0 ou vazio.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 

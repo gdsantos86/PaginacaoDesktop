@@ -37,49 +37,21 @@ namespace PaginacaoDesktop.Pagination
         }
 
 
-        private void AtualizaDeslocamento(bool proximo, int numeroPagina,int totalRegistros)
-        {
-            NumeroPagina = numeroPagina;
-            Deslocamento = (NumeroPagina - 1) * _itensPagina;
-
-            if (proximo)
-            {
-                //NumeroPagina++;
-                //Deslocamento = (NumeroPagina - 1) * _itensPagina;
-                if (Deslocamento >= totalRegistros)
-                {
-                    Deslocamento -= _itensPagina;
-                    //NumeroPagina = TotalPaginas;
-                }
-            }
-            else
-            {
-                //NumeroPagina--;
-                //Deslocamento = (NumeroPagina - 1) * _itensPagina;
-                if (Deslocamento <= 0)
-                {
-                    Deslocamento = 0;
-                    //NumeroPagina = 1;
-                }
-            }
-        }
-
-
         public void ConfiguraPaginacao(int itensPorPagina,int totalRegistros, TipoDeslocamento tipoDeslocamento) 
         {
             ItensPagina= itensPorPagina;
             this.AtualizaTotalPaginas(totalRegistros);
-            //this.AtualizaDeslocamento(proximo, numeroPagina, totalRegistros);
-            this.AtualizaDeslocamento1(tipoDeslocamento, totalRegistros);
+            this.AtualizaDeslocamento(tipoDeslocamento, totalRegistros);
         }
 
 
-        private void AtualizaDeslocamento1(TipoDeslocamento tipoDeslocamento, int totalRegistros)
+        private void AtualizaDeslocamento(TipoDeslocamento tipoDeslocamento, int totalRegistros)
         {
             if (tipoDeslocamento ==  TipoDeslocamento.PROXIMO)
             {
                 NumeroPagina++;
                 Deslocamento = (NumeroPagina - 1) * _itensPagina;
+
                 if (Deslocamento >= totalRegistros)
                 {
                     Deslocamento -= _itensPagina;
@@ -90,16 +62,17 @@ namespace PaginacaoDesktop.Pagination
             {
                 NumeroPagina--;
                 Deslocamento = (NumeroPagina - 1) * _itensPagina;
+
                 if (Deslocamento <= 0)
                 {
-                    Deslocamento = 0;
                     NumeroPagina = 1;
+                    Deslocamento = 0;
                 }
             }
             else if (tipoDeslocamento == TipoDeslocamento.PRIMEIRO)
             {
-                Deslocamento = 0;
                 NumeroPagina = 1;
+                Deslocamento = 0;
             }
             else if (tipoDeslocamento == TipoDeslocamento.ULTIMO)
             {
@@ -107,7 +80,6 @@ namespace PaginacaoDesktop.Pagination
                 Deslocamento = (NumeroPagina - 1) * _itensPagina;
             }
         }
-
 
         public enum TipoDeslocamento
         {
